@@ -53,6 +53,9 @@ basically, it is the instance we can create from the image and start using it.
 |`docker rm -f`|remove containers by force|
 |`docker rmi`|remove images|
 |`docker rmi -f`|remove images by force|
+|`docker -v`|mount your hosts folder directory to contaniners directory|
+|`docker run --volumes-from`|copy everything from old container into new container|
+|`docker exec -it containerName bash`|this will execute container in interactive mode with bash|
 
 ## Commands in Action
 - `docker` this command shows you what options are available to use.
@@ -140,3 +143,20 @@ the ports are empty because none of them is running if they are running it shows
 - `docker rm` now let's remove the first container with this command. just like stopping or starting containers, we can select them with id or their names for example:
 `docker rm 3bc` now the first container is deleted. if you got an error that means your container is still running stop the container or add `-f` to the command to remove it by force like this `docker rm 460 -f`
 - `docker rmi` with this we can also remove images just like removing containers but if you have multiple version like I do you better specify the version as well like this `docker image rmi nginx:latest` it gives an error if there are instance containers of the image so you can remove the containers or use force
+- `docker -v` `-v` command alow us to share data like files and folders between containers or containers and host for example, to share data between my folder in d:/nginxFolder/ and nginxs folder run this command after you changed your own directory in the terminal
+this how my terminal look
+`PS D:\NginxFolder>`
+now add this command 
+`PS D:\NginxFolder> docker run --name nginxWebsite -v ${pwd}:/usr/share/nginx/html -dp 8080:80 nginx` I am on wnindows and using powershell that why we use `${pwd}` if you are on mac or linux use `$(pwd)` instead.
+
+now you can go to D:/nginxFolder and create index.html page and run it in the browser like this Localhost:8080/index.html
+> ### Note: from the document there is `ro` in the end, :ro mean read only with :ro you can't add files from the container remove it for example:
+change this
+`${pwd}:/usr/share/nginx/html:ro`
+to this 
+`${pwd}:/usr/share/nginx/html`
+
+- `docker run --volumes-from` if you want to create new container with everything from old container we use this command for example:
+`docker run --name nginxWebsite-copy --volumes-from nginxWebsite -d -p 8081:80 nginx` now if you visit localhost:8081 everything should be the same
+
+- `docker exec -it ` if you want to access bash inside the container we use this command. for example `docker exec -it nginxWebsite bash` it is useful when we want to run command using linx bash inside container. now you can navigate to `/usr/share/nginx/html` and start creating files and folders for example `touch about.html` will create file now if you go to d:nginxFolder in windows you can see about.html created.
