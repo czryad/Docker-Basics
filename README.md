@@ -17,7 +17,7 @@ Basic information about Docker to get you started
 > ## But what does it do?
 > docker has a lot of power and it can do a lot of great things but for a simple dev like me I can use it to quickly install software just to test things out
 
-> **, for example,** I am a .Net Developer I have SQL Server installed on my machine but if I want to test my project with Mysql, instead of installing it the regular way I just can do it within a seconds with one line of command and start using it. and when I am finished testing I can just delete everything with ease of use.
+> **for example** I am a .Net Developer I have SQL Server installed on my machine but if I want to test my project with Mysql, instead of installing it the regular way I just can do it within a seconds with one line of command and start using it. and when I am finished testing I can just delete everything with ease of use.
 
 ## basic termonologies
 1. **Images**: Docker image is a read-only template that contains a set of instructions for creating as many containers you want.
